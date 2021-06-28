@@ -28,5 +28,7 @@ services:
       WORDPRESS_DB_NAME: wordpress
     networks:
       - infra
+    volumes:
+      - ./wordpress/data:/var/www/html
 networks:
   infra:
