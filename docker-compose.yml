@@ -4,13 +4,15 @@ services:
   db:
     image: mariadb:latest
     volumes:
-      - db_data:/var/lib/mysql
+      - ./db/data:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: somewordpress
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
+    networks:
+      - infra
 
   wordpress:
     depends_on:
@@ -24,5 +26,7 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
-volumes:
-  db_data: {}
+    networks:
+      - infra
+networks:
+  - infra
